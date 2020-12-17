@@ -9,14 +9,19 @@ const quizTitle = document.getElementById('quizTitle');
 let counter = 0; // aantal mutliple choice vragen
 let quiz; // object met quiz vragen
 let playerData = {}; // object, hierin worden de game gegevens opgeslagen
+let quizNummer = 1; // voorbereiden automatisch 2e quiz startem
+
 
 function init(){
-    quiz = quiz1; // kies de quiz
-    //quiz = quiz2; // kies de quiz
-    initQuiz(); // start de quiz
+  quiz = quiz1; // kies de quiz
+  //  quiz = quiz2; // kies de quiz
+  initQuiz(); // start de quiz
 }
 
 function initQuiz(){
+  questionBox.style.display = "block"; // reset alle player game variabelen
+  resultBox.style.display = "none"; // reset alle player game variabelen
+  counter = 0; // reset alle player game variabelen
   playerData.goodAnswers = 0; // reset alle player game variabelen
   playerData.wrongAnswers = 0; // reset alle player game variabelen
   playerName = ""; // toekomstige uitbreiding naam speler opvragen
