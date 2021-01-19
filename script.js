@@ -6,7 +6,7 @@ const questionBox = document.getElementById('questionBox');
 const resultBox = document.getElementById('resultBox');
 const quizTitle = document.getElementById('quizTitle');
 
-let counter = 0; // aantal mutliple choice vragen
+let questionsAnsweredCounter = 0; // aantal mutliple choice vragen
 let quiz; // object met quiz vragen
 let playerData = {}; // object, hierin worden de game gegevens opgeslagen
 let quizNummer = 1; // voorbereiden automatisch 2e quiz startem
@@ -21,7 +21,7 @@ function init(){
 function initQuiz(){
   questionBox.style.display = "block"; // reset alle player game variabelen
   resultBox.style.display = "none"; // reset alle player game variabelen
-  counter = 0; // reset alle player game variabelen
+  questionsAnsweredCounter = 0; // reset alle player game variabelen
   playerData.goodAnswers = 0; // reset alle player game variabelen
   playerData.wrongAnswers = 0; // reset alle player game variabelen
   playerName = ""; // toekomstige uitbreiding naam speler opvragen
@@ -40,15 +40,15 @@ function prepareQuestions() {
   quiz.answerClicked = false; // voorkom dubbel klikken op antwoord
 
 
-  if (counter < quiz.quizContent.length) { // test op aantal vragen
-    myQuestion.innerHTML = quiz.quizContent[counter].question; // laat vraag zien
+  if (questionsAnsweredCounter < quiz.quizContent.length) { // test op aantal vragen
+    myQuestion.innerHTML = quiz.quizContent[questionsAnsweredCounter].question; // laat vraag zien
     myAnswer.innerHTML = ""; 
     // zet de multiple choice antwoorden neer
-    for (let i = 0; i < quiz.quizContent[counter].answers.length; i++) {
+    for (let i = 0; i < quiz.quizContent[questionsAnsweredCounter].answers.length; i++) {
       let answer = document.createElement('li');
       answer.className = "answer";
-      answer.score = quiz.quizContent[counter].answers[i].feedback;
-      answer.innerHTML = quiz.quizContent[counter].answers[i].answer;
+      answer.score = quiz.quizContent[questionsAnsweredCounter].answers[i].feedback;
+      answer.innerHTML = quiz.quizContent[questionsAnsweredCounter].answers[i].answer;
       myAnswer.appendChild(answer);
       answer.addEventListener('click', evaluate, true)
     }
@@ -74,7 +74,7 @@ function evaluate(evt) {
     }
     quiz.answerClicked=true; // prevent double click
   }
-  counter++;
+  questionsAnsweredCounter++;
   questionBox.className = "questionBox";  // voorbereiden animatie
   setTimeout(prepareQuestions, delayTime); // wacht 2 seconden voor nieuwe vraag
 }
